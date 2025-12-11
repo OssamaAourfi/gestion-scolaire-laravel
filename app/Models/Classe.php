@@ -11,6 +11,6 @@ class Classe extends Model
     protected $fillable = ['nom','niveau'];
 
     public function students(){
-        return $this->hasMany(User::class)->where('role','student');
+        return $this->hasMany(User::class,'class_id')->where('role','student');
     }
 }

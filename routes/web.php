@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::resource('classes', ClasseController::class);
+    Route::resource('students', StudentController::class);
 });
 
 Route::middleware('auth')->group(function () {

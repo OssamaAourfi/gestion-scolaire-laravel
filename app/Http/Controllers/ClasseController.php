@@ -13,7 +13,7 @@ class ClasseController extends Controller
     public function index()
     {
         $classes = Classe::orderBy('created_at', 'desc')->paginate(5);
-        return view('classes.index', compact('produits'));
+        return view('classes.index', compact('classes'));
     }
 
     /**
