@@ -15,8 +15,25 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    
+
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <x-nav-link :href="route('classes.index')" :active="request()->routeIs('classes.*')">
+        {{ __('Classes') }}
+    </x-nav-link>
+</div>
+
+<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.*')">
+        {{ __('Élèves') }}
+    </x-nav-link>
+</div>
+
+<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <x-nav-link :href="route('matieres.index')" :active="request()->routeIs('matieres.*')">
+        {{ __('Matières') }}
+    </x-nav-link>
+</div>
             </div>
 
             <!-- Settings Dropdown -->

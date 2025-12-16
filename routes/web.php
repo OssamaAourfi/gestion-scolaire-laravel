@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use App\Models\Classe;
+use App\Models\Matiere;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\MatiereController;
@@ -11,7 +14,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $stats = [
+        'students' => User::where('role', 'student')->count(),
+        'classes' => Classe::count(),
+        'matieres' => Matiere::count(),
+    ];
+
+    return view('dashboard', compact('stats'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
