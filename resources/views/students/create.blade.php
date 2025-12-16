@@ -13,24 +13,30 @@
                     {{-- Nom --}}
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Nom Complet</label>
-                        <input type="text" name="name" class="border rounded w-full py-2 px-3">
+                        <input type="text" name="name" value="{{ old('name') }}" class="border rounded w-full py-2 px-3">
+                        {{-- Hada howa li kaybayen l-ghalat --}}
+                        @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
-                    {{-- Email --}}
+                    {{-- Email (Kan fih ghalat qbila, db s7i7) --}}
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                        <input type="email" name="name" name="email" class="border rounded w-full py-2 px-3">
+                        <input type="email" name="email" value="{{ old('email') }}" class="border rounded w-full py-2 px-3">
+                        @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
-                    {{-- LE CHOIX DE LA CLASSE (Relation) --}}
+                    {{-- LE CHOIX DE LA CLASSE --}}
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Classe</label>
                         <select name="class_id" class="border rounded w-full py-2 px-3">
                             <option value="">-- Choisir une classe --</option>
                             @foreach($classes as $classe)
-                                <option value="{{ $classe->id }}">{{ $classe->nom }}</option>
+                                <option value="{{ $classe->id }}" {{ old('class_id') == $classe->id ? 'selected' : '' }}>
+                                    {{ $classe->nom }}
+                                </option>
                             @endforeach
                         </select>
+                        @error('class_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
                     <button type="submit" class="bg-green-600 text-green font-bold py-2 px-4 rounded">
