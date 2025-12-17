@@ -80,4 +80,90 @@
 
         </div>
     </div>
+    {{-- PARTIE ABSENCES (Ghir l Student) --}}
+            @if(!$isAdmin)
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <h3 class="text-lg font-bold mb-4 text-red-600">Mon Suivi d'Assiduité (Absences)</h3>
+
+                        @if($absences->isEmpty())
+                            <p class="text-green-600 font-bold">Bravo! Aucune absence enregistrée.</p>
+                        @else
+                            <table class="min-w-full">
+                                <thead class="bg-red-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase">Date</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase">Justification</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($absences as $absence)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ \Carbon\Carbon::parse($absence->date)->format('d/m/Y') }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @if($absence->justifie)
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Justifiée (Certificat)
+                                                </span>
+                                            @else
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                    Non Justifiée ⚠️
+                                                </span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
+                </div>
+            @endif
+            {{-- PARTIE EMPLOI DU TEMPS (Ghir l Student) --}}
+            @if(!$isAdmin)
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6 mb-12">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-blue-600">📅 Mon Emploi du Temps</h3>
+                        </div>
+
+                        @if($emplois->isEmpty())
+                            <p class="text-gray-500 italic">Aucun emploi du temps disponible pour votre classe.</p>
+                        @else
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full border border-gray-200">
+                                    <thead class="bg-blue-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase">Jour</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase">Horaire</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase">Matière</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach($emplois as $emploi)
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-6 py-4 whitespace-nowrap font-bold text-gray-800">
+                                                {{ $emploi->jour }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                                                <span class="bg-blue-100 text-blue-800 py-1 px-2 rounded text-sm">
+                                                    {{ \Carbon\Carbon::parse($emploi->heure_debut)->format('H:i') }}
+                                                    -
+                                                    {{ \Carbon\Carbon::parse($emploi->heure_fin)->format('H:i') }}
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap font-bold text-indigo-600">
+                                                {{ $emploi->matiere->nom }}
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
 </x-app-layout>

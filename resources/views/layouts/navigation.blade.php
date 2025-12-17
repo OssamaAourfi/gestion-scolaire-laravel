@@ -39,6 +39,16 @@
         {{ __('Notes') }}
     </x-nav-link>
 </div>
+<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <x-nav-link :href="route('absences.index')" :active="request()->routeIs('absences.*')">
+        {{ __('Absences') }}
+    </x-nav-link>
+</div>
+<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <x-nav-link :href="route('emplois.index')" :active="request()->routeIs('emplois.*')">
+        {{ __('Emploi du Temps') }}
+    </x-nav-link>
+</div>
             </div>
 
             <!-- Settings Dropdown -->
